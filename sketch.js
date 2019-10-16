@@ -1,22 +1,30 @@
 
-let canvas;
+let mic;
 
 function setup(){
+createCanvas(windowWidth, windowHeight);
 
-canvas = createCannvas(windowWidth,windowHeight);
-canvas.position(0,0);
-canvas.style('z-index', '-1');
+mic = new p5.AudioIn();
 
-background(255,10,40);
-
- 
+mic.start();
 }
+
 function draw(){
 
-point(mouseX,mouseY);
-for(let i = 0; i<windowWidth; i+=5){
-strokeWeight(0,5);
-stroke(150);
-line(0, i, 500, 1);
+background(255,36,30);
 
+let vol = mic.getLevel();
+let i = map(vol, 0, 0.5, 10, 100);
+
+rect(100,100,i,30);
+print(vol);
+
+
+}
+
+
+function touchStarted(){
+
+
+  getAudioContext().resume();
 }
